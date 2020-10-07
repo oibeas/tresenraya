@@ -12,6 +12,7 @@
         let jugador = 1;
 
 
+
         function dibujar() {
             for (i = 0; i < 9; i++) {
                 if (mapa[i] == 1) document.getElementById("c" + i).innerText = "X";
@@ -19,10 +20,50 @@
             }
         }
 
+        // Devuelve un numero aleatorio del 0 al max
+        function getRandomArbitrary(max) {
+            return Math.floor(Math.random() * max);
+        }
+
+
+        window.onload = inicio;
+
+        function inicio() {
+            // Pinta aleatoriomente las dos primeras filas
+            inicio2: for (j = 0; j < 6; j++) {
+                let aleatorio = getRandomArbitrary(6);
+                console.log(mapa);
+                if (mapa[aleatorio] == 0) {
+                    mapa[aleatorio] = jugador;
+                    jugador == 1 ? jugador = 2 : jugador = 1;
+                } else {
+                    j--;
+                }
+
+                dibujar();
+
+
+                let r = ganador();
+                switch (r) {
+                    case 0:
+                        break;
+                    case 1:
+                        window.alert("Gana el jugador 1");
+                        break inicio2;
+                    case 2:
+                        window.alert("Gana el jugador 2");
+                        break inicio2;
+                    case 3:
+                        window.alert("Empate");
+                        break inicio2;
+                }
+            }
+
+
+        }
+
 
         function pcelda(celda) {
-
-
             if (mapa[celda] == 0) {
                 if (jugador == 1) {
                     mapa[celda] = 1;
@@ -35,7 +76,7 @@
                 window.alert("Ya se ha pintado");
             }
             dibujar();
-            var r = ganador();
+            let r = ganador();
             switch (r) {
                 case 0:
                     break;
@@ -51,7 +92,7 @@
             }
         }
         function ganador() {
-            var numEspacios = 0;
+            let numEspacios = 0;
             for (i = 0; i < 9; i++) {
                 if (mapa[i] == 0) numEspacios++;
             }
@@ -80,14 +121,14 @@
 
     <table border="1">
         <tr>
-            <td align="center" width="50" height="50" id="c0" onclick="pcelda(0)"></td>
-            <td align="center" width="50" height="50" id="c1" onclick="pcelda(1)"></td>
-            <td align="center" width="50" height="50" id="c2" onclick="pcelda(2)"></td>
+            <td align="center" width="50" height="50" id="c0"></td>
+            <td align="center" width="50" height="50" id="c1"></td>
+            <td align="center" width="50" height="50" id="c2"></td>
         </tr>
         <tr>
-            <td align="center" width="50" height="50" id="c3" onclick="pcelda(3)"></td>
-            <td align="center" width="50" height="50" id="c4" onclick="pcelda(4)"></td>
-            <td align="center" width="50" height="50" id="c5" onclick="pcelda(5)"></td>
+            <td align="center" width="50" height="50" id="c3"></td>
+            <td align="center" width="50" height="50" id="c4"></td>
+            <td align="center" width="50" height="50" id="c5"></td>
         </tr>
         <tr>
             <td align="center" width="50" height="50" id="c6" onclick="pcelda(6)"></td>
